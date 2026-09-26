@@ -1,0 +1,100 @@
+/* ============ header / nav / footer ============ */
+.site-header {
+  position: sticky; top: 0; z-index: 90;
+  height: var(--header-h);
+  display: flex; align-items: center;
+  /* Opaque-by-default: a transparent sticky header disappears over
+     paper on interior pages at scroll 0. Wash deepens once scrolled. */
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid var(--hairline);
+  transition: background var(--t-med) linear, border-color var(--t-med) linear;
+}
+.site-header[data-scrolled='true'] {
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  border-bottom-color: var(--accent-line);
+}
+.site-header .wrap-wide { display: flex; align-items: center; gap: 12px; width: 100%; }
+
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); flex: none; }
+.brand-mark { width: 26px; height: 26px; flex: none; }
+.brand-name {
+  font-family: var(--font-display); font-size: 1.12rem; font-weight: 700;
+  letter-spacing: .025em; line-height: 1;
+}
+.brand-name em { font-style: normal; color: var(--accent-text); }
+
+.nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.nav a {
+  padding: .5em .78em; border-radius: var(--r-pill);
+  font-size: .885rem; font-weight: 500; color: var(--text-muted);
+  text-decoration: none; white-space: nowrap;
+  transition: color var(--t-fast) linear, background var(--t-fast) linear;
+}
+.nav a:hover { color: var(--text); background: var(--accent-quiet); }
+.nav a.active { color: var(--accent-text); background: var(--accent-quiet); }
+
+.header-tools { display: flex; align-items: center; gap: 6px; flex: none; }
+
+.icon-btn {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  border-radius: var(--r-pill); border: 1px solid var(--hairline);
+  color: var(--text-muted);
+  transition: color var(--t-fast) linear, border-color var(--t-fast) linear, background var(--t-fast) linear;
+}
+.icon-btn:hover { color: var(--accent-text); border-color: var(--accent-line); background: var(--accent-quiet); }
+
+.nav-toggle { display: none; }
+@media (max-width: 1080px) {
+  .nav { display: none; }
+  .nav-toggle { display: grid; }
+  .site-header[data-open='true'] + .nav-drawer { display: block; }
+}
+.nav-drawer {
+  display: none; position: sticky; top: var(--header-h); z-index: 89;
+  background: var(--bg-raised); border-bottom: 1px solid var(--accent-line);
+  box-shadow: var(--shadow-md);
+}
+.nav-drawer nav { display: grid; padding: 12px var(--gutter) 20px; gap: 2px; }
+.nav-drawer a {
+  padding: .7em .2em; color: var(--text-muted); text-decoration: none;
+  border-bottom: 1px solid var(--hairline); font-weight: 500;
+}
+.nav-drawer a.active { color: var(--accent-text); }
+
+/* ============ footer ============ */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--hairline);
+  background: var(--bg-sunken);
+  padding-block: clamp(40px, 5vw, 64px) 28px;
+}
+.footer-grid {
+  display: grid; gap: clamp(24px, 4vw, 48px);
+  grid-template-columns: minmax(0, 1.5fr) repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+}
+.footer-col h5 {
+  font-size: .715rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent-text); font-weight: 600; margin-bottom: 12px;
+}
+.footer-col a { display: block; padding: 4px 0; color: var(--text-muted); text-decoration: none; font-size: .9rem; }
+.footer-col a:hover { color: var(--text); }
+
+.age-notice {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 36px; padding: 16px 18px;
+  border: 1px solid var(--accent-line); border-radius: var(--r-md);
+  background: var(--accent-quiet);
+}
+.age-badge {
+  flex: none; width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 2px solid var(--accent-text); color: var(--accent-text);
+  font-weight: 700; font-size: .92rem; font-family: var(--font-mono);
+}
+.footer-legal {
+  margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--hairline);
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between;
+  color: var(--text-faint); font-size: .8rem;
+}

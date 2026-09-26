@@ -1,0 +1,116 @@
+/* ============================================================
+   FOLD EQUITY — design tokens
+   Two themes. Brass is split into an *accent* token (decorative,
+   used on dark grounds) and an *ink* token (text-safe on light
+   grounds) because mid-tone brass fails AA on ivory.
+   ============================================================ */
+:root {
+  /* brand constants — identical in both themes */
+  --felt:        #0B3D2E;
+  --felt-deep:   #072A20;
+  --felt-lit:    #14563F;
+  --ink-black:   #0A0A0B;
+  --brass:       #C9A24A;
+  --brass-bright:#E3C075;
+  --ivory:       #F4EFE6;
+  --chip-red:    #B3261E;
+  --chip-red-lit:#D9453C;
+
+  /* radii, motion, elevation */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  --ease-weighted: cubic-bezier(.22, .61, .28, 1);
+  --ease-out-soft: cubic-bezier(.16, 1, .3, 1);
+  --t-fast: 180ms;
+  --t-med: 380ms;
+  --t-slow: 720ms;
+  --t-cinema: 1200ms;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.24);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.44), 0 12px 40px rgba(0,0,0,.34);
+  --shadow-lg: 0 10px 34px rgba(0,0,0,.5), 0 32px 90px rgba(0,0,0,.44);
+
+  --font-display: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --maxw: 1240px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --header-h: 66px;
+}
+
+/* ---------- DARK (default): late-night high-roller room ---------- */
+:root, :root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg:            #0A0A0B;
+  --bg-raised:     #121214;
+  --bg-sunken:     #050506;
+  --surface:       #16171A;
+  --surface-2:     #1E2024;
+  --surface-felt:  #0B2A21;
+  --hairline:      rgba(244,239,230,.10);
+  --hairline-strong: rgba(244,239,230,.19);
+
+  --text:          #F4EFE6;
+  --text-muted:    #A8A399;
+  --text-faint:    #74706A;
+
+  --accent:        var(--brass);        /* decorative + text on dark */
+  --accent-text:   #D9B463;             /* AA on --bg */
+  --accent-quiet:  rgba(201,162,74,.16);
+  --accent-line:   rgba(201,162,74,.34);
+
+  --danger:        #E56A62;             /* AA on dark */
+  --danger-solid:  var(--chip-red);
+  --success:       #5FC38E;
+  --info:          #7FB3E0;
+
+  --table-glow:    radial-gradient(60% 55% at 50% 38%, rgba(201,162,74,.18), transparent 70%);
+  --page-wash:
+     radial-gradient(120% 70% at 50% -10%, rgba(11,61,46,.55), transparent 62%),
+     radial-gradient(90% 60% at 82% 8%, rgba(201,162,74,.09), transparent 60%);
+  --card-face:     #F4EFE6;
+  --card-ink:      #14151A;
+}
+
+/* ---------- LIGHT: "daylight casino" ---------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg:            #F4EFE6;
+  --bg-raised:     #FFFDF8;
+  --bg-sunken:     #E8E1D4;
+  --surface:       #FFFDF8;
+  --surface-2:     #F2EADB;
+  --surface-felt:  #E3EDE6;
+  --hairline:      rgba(10,10,11,.12);
+  --hairline-strong: rgba(10,10,11,.22);
+
+  --text:          #16180F;
+  --text-muted:    #575347;
+  --text-faint:    #7E7869;
+
+  --accent:        #8A6A16;   /* decorative strokes on paper */
+  --accent-text:   #6B5210;   /* 6.2:1 on --bg — AA for body text */
+  --accent-quiet:  rgba(138,106,22,.12);
+  --accent-line:   rgba(138,106,22,.32);
+
+  --danger:        #9B1E17;   /* darkened chip red — AA on paper */
+  --danger-solid:  #B3261E;
+  --success:       #1E6B41;
+  --info:          #1B4E7A;
+
+  --table-glow:    radial-gradient(60% 55% at 50% 38%, rgba(201,162,74,.22), transparent 70%);
+  --page-wash:
+     radial-gradient(120% 70% at 50% -10%, rgba(11,61,46,.10), transparent 62%),
+     radial-gradient(90% 60% at 82% 8%, rgba(201,162,74,.12), transparent 60%);
+  --card-face:     #FFFFFF;
+  --card-ink:      #14151A;
+
+  --shadow-sm: 0 1px 2px rgba(40,30,10,.10), 0 2px 8px rgba(40,30,10,.07);
+  --shadow-md: 0 4px 16px rgba(40,30,10,.12), 0 12px 40px rgba(40,30,10,.09);
+  --shadow-lg: 0 10px 34px rgba(40,30,10,.16), 0 32px 90px rgba(40,30,10,.12);
+}
