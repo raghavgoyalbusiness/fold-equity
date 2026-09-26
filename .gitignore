@@ -7,3 +7,6 @@ dist
 # scratch
 docs/screens
 *.png
+
+# typescript incremental build cache
+*.tsbuildinfo
