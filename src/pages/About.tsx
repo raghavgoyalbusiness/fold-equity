@@ -45,6 +45,8 @@ export function About() {
   const [open, setOpen] = useState<number | null>(0)
   const render3d = useStore((s) => s.render3d)
   const setRender3d = useStore((s) => s.setRender3d)
+  const sound = useStore((s) => s.sound)
+  const toggleSound = useStore((s) => s.toggleSound)
 
   return (
     <div className="section">
@@ -102,6 +104,18 @@ export function About() {
                 {v === 'auto' ? 'Automatic' : v === 'on' ? 'Always 3D' : 'Always 2D'}
               </button>
             ))}
+          </div>
+
+          <h4 style={{ marginTop: 24 }}>Table sounds</h4>
+          <p className="small muted">
+            Cards landing on felt and chips clacking, synthesised rather than sampled so no
+            audio files are downloaded. <b>Off by default</b> — sound should always be something
+            you choose. The toggle is also in the header on every page.
+          </p>
+          <div className="chips" style={{ marginTop: 14 }}>
+            <button className={`chip${sound ? ' is-on' : ''}`} onClick={toggleSound} aria-pressed={sound}>
+              {sound ? 'Sounds on' : 'Sounds off'}
+            </button>
           </div>
         </div>
 

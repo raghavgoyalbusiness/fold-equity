@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { useStore } from './lib/store'
+import { setMuted } from './lib/sound'
 
 import './styles/tokens.css'
 import './styles/base.css'
@@ -11,8 +12,9 @@ import './styles/components.css'
 import './styles/pages.css'
 import './styles/three.css'
 
-// Apply the persisted theme before first paint so there is no flash.
+// Apply persisted preferences before first paint so there is no flash.
 document.documentElement.setAttribute('data-theme', useStore.getState().theme)
+setMuted(!useStore.getState().sound)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

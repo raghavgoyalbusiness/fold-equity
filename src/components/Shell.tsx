@@ -27,6 +27,8 @@ function Mark() {
 export function Header() {
   const theme = useStore((s) => s.theme)
   const toggleTheme = useStore((s) => s.toggleTheme)
+  const sound = useStore((s) => s.sound)
+  const toggleSound = useStore((s) => s.toggleSound)
   const scrolled = useScrolled()
   const [open, setOpen] = useState(false)
   const loc = useLocation()
@@ -54,6 +56,23 @@ export function Header() {
           </nav>
 
           <div className="header-tools">
+            <button
+              className="icon-btn"
+              onClick={toggleSound}
+              aria-label={sound ? 'Mute table sounds' : 'Unmute table sounds'}
+              aria-pressed={sound}
+              title={sound ? 'Table sounds on' : 'Table sounds off'}
+            >
+              {sound ? (
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 5L5.6 8.6H2.6v6.8h3L10 19z" /><path d="M15.4 9.1a4 4 0 0 1 0 5.8" /><path d="M18 6.4a7.8 7.8 0 0 1 0 11.2" />
+                </svg>
+              ) : (
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10 5L5.6 8.6H2.6v6.8h3L10 19z" /><path d="M16.2 9.8l5 4.4M21.2 9.8l-5 4.4" />
+                </svg>
+              )}
+            </button>
             <button
               className="icon-btn"
               onClick={toggleTheme}

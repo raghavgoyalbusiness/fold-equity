@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { setMuted } from './sound'
 
 export type Theme = 'dark' | 'light'
 export type SkillLevel = 'new' | 'casual' | 'serious' | 'pro'
@@ -26,6 +27,10 @@ interface State {
   render3d: 'auto' | 'on' | 'off'
   setRender3d: (v: 'auto' | 'on' | 'off') => void
 
+  /** Table sounds. Off by default — audio should always be opt-in. */
+  sound: boolean
+  toggleSound: () => void
+
   quizResults: QuizResult[]
   addQuizResult: (r: QuizResult) => void
   clearQuizResults: () => void
@@ -43,6 +48,13 @@ export const useStore = create<State>()(
 
       render3d: 'auto',
       setRender3d: (render3d) => set({ render3d }),
+
+      sound: false,
+      toggleSound: () => {
+        const next = !get().sound
+        set({ sound: next })
+        void setMuted(!next)
+      },
 
       quizResults: [],
       addQuizResult: (r) => set({ quizResults: [...get().quizResults, r].slice(-40) }),

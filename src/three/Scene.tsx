@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import { cardFaceTexture, cardBackTexture, cardEdgeTexture, chipTexture } from './cardTexture'
+import { playCard, playChip } from '../lib/sound'
 import { TABLE_RX, TABLE_RZ, DECK_ORIGIN, seatPos, seatAngle, type CardSlot } from './dealPlan'
 
 const CARD_W = 0.42
@@ -30,6 +31,7 @@ const Card3D = memo(function Card3D({
 }: { slot: CardSlot; reduced: boolean; onHover: (t: string | null) => void }) {
   const ref = useRef<THREE.Group>(null)
   const t = useRef(0)
+  const landed = useRef(false)
   const [hovered, setHovered] = useState(false)
 
   const materials = useMemo(() => {
@@ -57,6 +59,10 @@ const Card3D = memo(function Card3D({
     const local = t.current - slot.delay
     if (local < 0) { g.visible = false; return }
     g.visible = true
+    if (!landed.current && local >= 0.62) {
+      landed.current = true
+      playCard()
+    }
     // Weighted ease-out: fast off the deck, settling slowly onto the felt.
     const p = Math.min(1, local / 0.62)
     const e = 1 - Math.pow(1 - p, 3)
@@ -107,7 +113,7 @@ function ChipStack({
   return (
     <group
       position={[x, 0.245, z]}
-      onPointerOver={(e) => { e.stopPropagation(); setHovered(true); onHover(tip) }}
+      onPointerOver={(e) => { e.stopPropagation(); setHovered(true); onHover(tip); playChip() }}
       onPointerOut={(e) => { e.stopPropagation(); setHovered(false); onHover(null) }}
     >
       {Array.from({ length: count }, (_, i) => (

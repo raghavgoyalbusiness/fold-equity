@@ -142,6 +142,17 @@ Every prompt carries the same non-negotiables:
 - **Range percentages are computed at runtime** from the notation, and Short Deck uses
   a 630-combination denominator rather than 1,326.
 
+## Table sounds
+
+Cards landing and chips clacking are **synthesised with Web Audio**, not shipped as
+files — two short sounds are not worth a network request, and synthesis lets each hit
+vary so a twelve-card deal sounds like a rustle rather than a rattle. Card hits are
+rate-limited to one per 38ms.
+
+**Off by default.** The toggle sits in the header on every page and in
+About → Display settings. The `AudioContext` is created lazily on the first deliberate
+play, so nothing is initialised for people who never turn it on.
+
 ## Accessibility & motion
 
 - One `h1` per page; skip link; focus-visible rings throughout.
@@ -150,6 +161,7 @@ Every prompt carries the same non-negotiables:
 - 3D degrades to an illustrated 2D table on low-power and touch devices, with a manual
   override in About → Display settings.
 - Four-colour deck so diamonds and hearts stay distinguishable at small sizes.
+- Table sounds are opt-in and never play under `prefers-reduced-motion`.
 
 ## 18+ · educational only
 
